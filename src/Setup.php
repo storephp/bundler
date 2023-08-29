@@ -2,6 +2,7 @@
 
 namespace StorePHP\Bundler;
 
+use StorePHP\Bundler\Compiling\RoutesCompile;
 use StorePHP\Bundler\BundlesDirectory;
 
 class Setup
@@ -17,7 +18,9 @@ class Setup
 
         $this->modulesPaths = BundleRegistrar::getPaths(BundleRegistrar::MODULE);
 
-        $this->compiles = [];
+        $this->compiles = [
+            RoutesCompile::class,
+        ];
     }
 
     public function run(string $cachePrefix = null)
