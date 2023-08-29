@@ -1,0 +1,23 @@
+{
+    "name": "storephp/bundler",
+    "description": "This is StorePHP's framework for building bundles",
+    "autoload": {
+        "psr-4": {
+            "StorePHP\\Bundler\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Karim Mohamed",
+            "email": "komicho1996@gmail.com"
+        }
+    ],
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "StorePHP\\Bundler\\StorePHPBundlerServiceProvider"
+            ]
+        }
+    }
+}
