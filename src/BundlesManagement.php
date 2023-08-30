@@ -35,4 +35,12 @@ class BundlesManagement
     {
         return Cache::get($this->getCachePrefix() . 'storephp_routes');
     }
+
+    /**
+     * Get the value of routes
+     */
+    public function getSidebar()
+    {
+        return Cache::get($this->getCachePrefix() . 'storephp_sidebar');
+    }
 }

@@ -2,8 +2,9 @@
 
 namespace StorePHP\Bundler;
 
-use StorePHP\Bundler\Compiling\RoutesCompile;
 use StorePHP\Bundler\BundlesDirectory;
+use StorePHP\Bundler\Compiling\RoutesCompile;
+use StorePHP\Bundler\Compiling\SidebarCompile;
 
 class Setup
 {
@@ -20,6 +21,7 @@ class Setup
 
         $this->compiles = [
             RoutesCompile::class,
+            SidebarCompile::class,
         ];
     }
 
