@@ -43,4 +43,18 @@ class BundlesManagement
     {
         return Cache::get($this->getCachePrefix() . 'storephp_sidebar');
     }
+
+    /**
+     * Get the value of grids
+     */
+    public function getGrids($id = null)
+    {
+        $grids = Cache::get($this->getCachePrefix() . 'storephp_grids');
+
+        if (!is_null($id)) {
+            return $grids[$id];
+        }
+
+        return $grids;
+    }
 }

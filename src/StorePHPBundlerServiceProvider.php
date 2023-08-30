@@ -28,6 +28,8 @@ class StorePHPBundlerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'storephp-bundler');
+
         if ($this->app->runningInConsole()) {
             $this->commands([
                 SetupCommand::class,

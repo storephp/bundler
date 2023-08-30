@@ -3,6 +3,7 @@
 namespace StorePHP\Bundler;
 
 use StorePHP\Bundler\BundlesDirectory;
+use StorePHP\Bundler\Compiling\GridsCompile;
 use StorePHP\Bundler\Compiling\RoutesCompile;
 use StorePHP\Bundler\Compiling\SidebarCompile;
 
@@ -22,6 +23,7 @@ class Setup
         $this->compiles = [
             RoutesCompile::class,
             SidebarCompile::class,
+            GridsCompile::class,
         ];
     }
 
