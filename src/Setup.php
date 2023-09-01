@@ -5,6 +5,7 @@ namespace StorePHP\Bundler;
 use StorePHP\Bundler\BundlesDirectory;
 use StorePHP\Bundler\Compiling\FormsCompile;
 use StorePHP\Bundler\Compiling\GridsCompile;
+use StorePHP\Bundler\Compiling\ModulesCompile;
 use StorePHP\Bundler\Compiling\RoutesCompile;
 use StorePHP\Bundler\Compiling\SidebarCompile;
 
@@ -22,6 +23,7 @@ class Setup
         $this->modulesPaths = BundleRegistrar::getPaths(BundleRegistrar::MODULE);
 
         $this->compiles = [
+            ModulesCompile::class,
             RoutesCompile::class,
             SidebarCompile::class,
             GridsCompile::class,

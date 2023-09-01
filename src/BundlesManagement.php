@@ -45,6 +45,36 @@ class BundlesManagement
     }
 
     /**
+     * Get the value of modules
+     */
+    public function getModules($id = null)
+    {
+        $modules = Cache::get($this->getCachePrefix() . 'storephp_modules');
+
+        if (!is_null($id)) {
+            return $modules[$id];
+        }
+
+        return $modules;
+    }
+
+    /**
+     * Get the value of provoiders
+     */
+    public function getProvoiders()
+    {
+        $modules = $this->getModules();
+
+        $outProvoiders = [];
+
+        foreach ($modules as $module) {
+            $outProvoiders = array_merge($outProvoiders, $module['provoiders']);
+        }
+
+        return $outProvoiders;
+    }
+
+    /**
      * Get the value of grids
      */
     public function getGrids($id = null)
