@@ -57,4 +57,18 @@ class BundlesManagement
 
         return $grids;
     }
+
+    /**
+     * Get the value of forms
+     */
+    public function getForms($id = null)
+    {
+        $forms = Cache::get($this->getCachePrefix() . 'storephp_forms');
+
+        if (!is_null($id)) {
+            return $forms[$id];
+        }
+
+        return $forms;
+    }
 }
