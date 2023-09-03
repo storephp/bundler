@@ -25,6 +25,19 @@ abstract class FromAbstract extends Component
         }
     }
 
+    public function models(array $ignores = [])
+    {
+        $outmodels = [];
+
+        foreach ($this->fields as $field) {
+            if (!in_array($field['model'], $ignores)) {
+                array_push($outmodels, $field['model']);
+            }
+        }
+
+        return $outmodels;
+    }
+
     public function preTitle()
     {
         return Str::contains($this->pretitle, '::forms') ? __($this->pretitle) : $this->pretitle;
