@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use StorePHP\Bundler\BundlesManagement;
 use StorePHP\Bundler\Components\Form\CheckboxField;
 use StorePHP\Bundler\Components\Form\DateField;
+use StorePHP\Bundler\Components\Form\FileField;
 use StorePHP\Bundler\Components\Form\SelectField;
 use StorePHP\Bundler\Components\Form\TextareaField;
 use StorePHP\Bundler\Components\Form\TextField;
@@ -55,6 +56,7 @@ class StorePHPBundlerServiceProvider extends ServiceProvider
             TextareaField::class,
             DateField::class,
             CheckboxField::class,
+            FileField::class,
         ];
     }
 }
