@@ -1,11 +1,11 @@
-<form class="card" wire:submit.prevent="submit" x-data="{ tabId: 'default' }">
+<form class="card" wire:submit.prevent="submit" x-data="{ tabId: 'default', tabLabel: '{{ $mainTab['label'] }}' }">
     <div class="row g-0">
         <div class="col-12 col-md-3 border-end">
             <div class="card-body">
                 <h4 class="subheader">Tabs</h4>
                 <div class="list-group list-group-transparent">
                     @foreach ($tabs as $tab)
-                        <a href="#" x-on:click="tabId = '{{ $tab['id'] }}'"
+                        <a href="#" x-on:click="tabId = '{{ $tab['id'] }}'; tabLabel = '{{ $tab['label'] }}'"
                             class="list-group-item list-group-item-action d-flex align-items-center"
                             :class="{ 'active': tabId === '{{ $tab['id'] }}' }">{{ $tab['label'] }}</a>
                     @endforeach
@@ -14,7 +14,7 @@
         </div>
         <div class="col-12 col-md-9 d-flex flex-column">
             <div class="card-body">
-                <h2 class="mb-4">My Account</h2>
+                <h3 class="card-title" x-text="tabLabel">Card with side status</h3>
 
                 @foreach ($groupFields as $tabfields => $fields)
                     <div x-show="tabId == '{{ $tabfields }}'">
@@ -30,8 +30,8 @@
                             @endif
 
                             @if ($field['type'] == 'textarea')
-                                <x-store-php-textarea-field label="{{ $field['label'] }}" model="{{ $field['model'] }}"
-                                    :hint="$field['hint']" :required="str_contains($field['rules'], 'required')" />
+                                <x-store-php-textarea-field label="{{ $field['label'] }}"
+                                    model="{{ $field['model'] }}" :hint="$field['hint']" :required="str_contains($field['rules'], 'required')" />
                             @endif
 
                             @if ($field['type'] == 'date')

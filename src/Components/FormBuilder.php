@@ -11,6 +11,7 @@ class FormBuilder extends Component
     public $method = 'POST';
     public $action = null;
     public $groupFields = [];
+    public $mainTab = [];
     public $tabs = [];
 
     /**
@@ -29,6 +30,7 @@ class FormBuilder extends Component
         $grouped = $collection->groupBy('tab');
 
         $this->groupFields = $grouped->toArray();
+        $this->mainTab = Bundles::getForms($id)['tabs'][0];
         $this->tabs = Bundles::getForms($id)['tabs'];
     }
 
