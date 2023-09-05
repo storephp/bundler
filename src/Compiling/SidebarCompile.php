@@ -31,7 +31,9 @@ class SidebarCompile
 
                 $sidebar->menu($menu);
 
-                $sidebar->links($link);
+                if (method_exists($sidebar, 'links')) {
+                    $sidebar->links($link);
+                }
 
                 $side = [
                     'info' => $menu->getInfo(),
@@ -53,7 +55,14 @@ class SidebarCompile
     public function manage($paths)
     {
         $sidebar = $this->merge($paths);
-        $this->cache($sidebar);
+
+        $collection = collect($sidebar);
+
+        $sorted = $collection->sortBy(function (array $sidebar) {
+            return $sidebar['info']['order'];
+        });
+
+        $this->cache($sorted->all());
         $this->count = count($sidebar);
     }
 }

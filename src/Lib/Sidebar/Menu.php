@@ -6,11 +6,13 @@ class Menu
 {
     private $info = [];
 
-    public function info($icon, $label)
+    public function info($icon, $label, $href = null, $order = 0)
     {
         $this->info = [
             'icon' => $icon,
             'label' => $label,
+            'href' => $href,
+            'order' => $order,
         ];
     }
 
