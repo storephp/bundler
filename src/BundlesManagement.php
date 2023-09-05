@@ -67,8 +67,10 @@ class BundlesManagement
 
         $outProvoiders = [];
 
-        foreach ($modules as $module) {
-            $outProvoiders = array_merge($outProvoiders, $module['provoiders']);
+        if ($modules) {
+            foreach ($modules as $module) {
+                $outProvoiders = array_merge($outProvoiders, $module['provoiders']);
+            }
         }
 
         return $outProvoiders;
