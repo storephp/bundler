@@ -37,11 +37,27 @@ class BundlesManagement
     }
 
     /**
+     * Get the value of admin routes
+     */
+    public function getAdminRoutes()
+    {
+        return Cache::get($this->getCachePrefix() . 'storephp_admin_routes');
+    }
+
+    /**
      * Get the value of routes
      */
     public function getSidebar()
     {
         return Cache::get($this->getCachePrefix() . 'storephp_sidebar');
+    }
+
+    /**
+     * Get the value of admin sidebar
+     */
+    public function getAdminSidebar()
+    {
+        return Cache::get($this->getCachePrefix() . 'storephp_admin_sidebar');
     }
 
     /**

@@ -5,9 +5,11 @@ namespace StorePHP\Bundler;
 class BundleRegistrar
 {
     const MODULE = 'module';
+    const ADMINMODULE = 'admin_module';
 
     private static $paths = [
         self::MODULE => [],
+        self::ADMINMODULE => [],
     ];
 
     public static function register($type, $bundleName, $path)
