@@ -119,4 +119,30 @@ class BundlesManagement
 
         return $forms;
     }
+
+    /**
+     * Get the value of ACLs
+     */
+    public function getACLs()
+    {
+        return Cache::get($this->getCachePrefix() . 'storephp_acls');
+    }
+
+    /**
+     * Get the value of ACLs
+     */
+    public function getPermissions()
+    {
+        $acls = $this->getACLs();
+        
+        $outAcls = [];
+
+        foreach ($acls as $key => $acl) {
+            foreach ($acl as $a) {
+                array_push($outAcls, $a);
+            }
+        }
+
+        return $outAcls;
+    }
 }

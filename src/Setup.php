@@ -3,6 +3,7 @@
 namespace StorePHP\Bundler;
 
 use StorePHP\Bundler\BundlesDirectory;
+use StorePHP\Bundler\Compiling\ACLCompile;
 use StorePHP\Bundler\Compiling\Admin\FormsAdminCompile;
 use StorePHP\Bundler\Compiling\Admin\GridsAdminCompile;
 use StorePHP\Bundler\Compiling\Admin\ModulesAdminCompile;
@@ -36,6 +37,7 @@ class Setup
             SidebarCompile::class,
             GridsCompile::class,
             FormsCompile::class,
+            ACLCompile::class,
         ];
 
         $this->adminCompiles = [
