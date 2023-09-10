@@ -134,7 +134,7 @@ class BundlesManagement
     public function getPermissions()
     {
         $acls = $this->getACLs();
-        
+
         $outAcls = [];
 
         foreach ($acls as $key => $acl) {
@@ -144,5 +144,27 @@ class BundlesManagement
         }
 
         return $outAcls;
+    }
+
+    /**
+     * Get the value of configuration
+     */
+    public function getTabsConfiguration()
+    {
+        return Cache::get($this->getCachePrefix() . 'storephp_configuration');
+    }
+
+    /**
+     * Get the fields of configuration
+     */
+    public function getTabsFieldsConfiguration($tab = null)
+    {
+        $fields = Cache::get($this->getCachePrefix() . 'storephp_configuration_fields');
+
+        if (!is_null($tab)) {
+            return $fields[$tab];
+        }
+
+        return $fields;
     }
 }
