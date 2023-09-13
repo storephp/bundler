@@ -1,3 +1,10 @@
+<p align="center"><a href="#" target="_blank"><img src="./cover.svg"/></a></p>
+
+<p align="center">
+  <a href="https://packagist.org/packages/storephp/bundler" target="_blank"><img src="https://img.shields.io/static/v1?label=Packagist&message=storephp/bundler&color=blue&logo=packagist&logoColor=white" alt="Source"></a>
+  <a href="https://packagist.org/packages/storephp/bundler" target="_blank"><img src="https://poser.pugx.org/storephp/bundler/v" alt="Packagist Version"></a>
+</p>
+
 # StorePHP Bundler
 
 This is StorePHP's framework for building bundles
@@ -37,10 +44,12 @@ BundleRegistrar::register(BundleRegistrar::MODULE, '<vendor>_<module>', __DIR__)
 ```php
 <?php
 
+use StorePHP\Bundler\Contracts\Form\FormHasFields;
+use StorePHP\Bundler\Contracts\Form\FormHasTabs;
 use StorePHP\Bundler\Lib\Form\Fields;
 use StorePHP\Bundler\Lib\Form\Tabs;
 
-return new class
+return new class implements FormHasTabs, FormHasFields
 {
     public function tabs(Tabs $tabs)
     {
@@ -141,13 +150,14 @@ class ProductCreate extends FromAbstract
 ```php
 <?php
 
-use StorePHP\Bundler\Lib\Grid\{
-    CTA,
-    Table,
-    Bottom
-};
+use StorePHP\Bundler\Contracts\Grid\GridHasButtons;
+use StorePHP\Bundler\Contracts\Grid\GridHasCTA;
+use StorePHP\Bundler\Contracts\Grid\GridHasTable;
+use StorePHP\Bundler\Lib\Grid\Bottom;
+use StorePHP\Bundler\Lib\Grid\CTA;
+use StorePHP\Bundler\Lib\Grid\Table;
 
-return new class
+return new class implements GridHasTable, GridHasButtons, GridHasCTA
 {
     public function model()
     {
@@ -217,8 +227,9 @@ Route::prefix('catalog')->group(function () {
 <?php
 
 use StorePHP\Bundler\Lib\ACL;
+use StorePHP\Bundler\Contracts\ACL\HasPermissions;
 
-return new class
+return new class implements HasPermissions
 {
     public function permissions(ACL $acl)
     {
@@ -234,8 +245,9 @@ return new class
 
 use StorePHP\Catalog\Providers\StoreCatalogServiceProvider;
 use StorePHP\Bundler\Lib\Module;
+use StorePHP\Bundler\Contracts\Module\iModule;
 
-return new class
+return new class implements iModule
 {
     public function info(Module $module)
     {
@@ -252,10 +264,12 @@ return new class
 ```php title=etc/sidebar.php
 <?php
 
+use StorePHP\Bundler\Contracts\Sidebar\HasLinks;
+use StorePHP\Bundler\Contracts\Sidebar\HasMenu;
 use StorePHP\Bundler\Lib\Sidebar\Menu;
 use StorePHP\Bundler\Lib\Sidebar\Links;
 
-return new class
+return new class implements HasMenu, HasLinks
 {
     public function menu(Menu $menu)
     {
