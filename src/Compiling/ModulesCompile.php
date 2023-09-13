@@ -3,6 +3,7 @@
 namespace StorePHP\Bundler\Compiling;
 
 use Illuminate\Support\Facades\Cache;
+use StorePHP\Bundler\Contracts\Module\iModule;
 use StorePHP\Bundler\Lib\Module;
 
 class ModulesCompile
@@ -28,6 +29,11 @@ class ModulesCompile
             $module = new Module;
             $pathModuleFile = require $pathModuleFile;
             $pathModuleFile = new $pathModuleFile;
+
+            if (!$pathModuleFile instanceof iModule) {
+                throw new \Exception('Must implement `iModule` in ' . $id, 1);
+            }
+
             $pathModuleFile->info($module);
 
             $outModules[$id] = array_merge($outModules[$id] ?? [], $module->getInfo());

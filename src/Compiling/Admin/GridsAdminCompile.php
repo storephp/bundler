@@ -3,6 +3,9 @@
 namespace StorePHP\Bundler\Compiling\Admin;
 
 use Illuminate\Support\Facades\Cache;
+use StorePHP\Bundler\Contracts\Grid\GridHasButtons;
+use StorePHP\Bundler\Contracts\Grid\GridHasCTA;
+use StorePHP\Bundler\Contracts\Grid\GridHasTable;
 use StorePHP\Bundler\Lib\Grid\Bottom;
 use StorePHP\Bundler\Lib\Grid\CTA;
 use StorePHP\Bundler\Lib\Grid\Table;
@@ -28,17 +31,24 @@ class GridsAdminCompile
                     $gridClass = include($filename);
                     $gridClass = new $gridClass;
 
+                    if (!$gridClass instanceof GridHasTable) {
+                        throw new \Exception('Must implement `GridHasTable` in ' . $id . '_' . basename($filename, '.php'), 1);
+                    }
+
                     //Columns class
                     $table = new Table;
                     $CTA = new CTA;
                     $bottom = new Bottom;
 
-                    if (method_exists($gridClass, 'createBottom')) {
+                    if ($gridClass instanceof GridHasButtons) {
                         $gridClass->createBottom($bottom);
                     }
 
                     $gridClass->table($table);
-                    $gridClass->CTA($CTA);
+
+                    if ($gridClass instanceof GridHasCTA) {
+                        $gridClass->CTA($CTA);
+                    }
 
                     $_grid[$id . '_' . basename($filename, '.php')] = [
                         'model' => $gridClass->model(),

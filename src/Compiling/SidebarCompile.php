@@ -3,6 +3,8 @@
 namespace StorePHP\Bundler\Compiling;
 
 use Illuminate\Support\Facades\Cache;
+use StorePHP\Bundler\Contracts\Sidebar\HasLinks;
+use StorePHP\Bundler\Contracts\Sidebar\HasMenu;
 use StorePHP\Bundler\Lib\Sidebar\Links;
 use StorePHP\Bundler\Lib\Sidebar\Menu;
 
@@ -26,12 +28,16 @@ class SidebarCompile
                 $sidebar = require $pathSidebarFile;
                 $sidebar = new $sidebar;
 
+                if (!$sidebar instanceof HasMenu) {
+                    throw new \Exception('Must implement `HasMenu` in ' . $id, 1);
+                }
+
                 $link = new Links;
                 $menu = new Menu;
 
                 $sidebar->menu($menu);
 
-                if (method_exists($sidebar, 'links')) {
+                if ($sidebar instanceof HasLinks) {
                     $sidebar->links($link);
                 }
 

@@ -3,6 +3,8 @@
 namespace StorePHP\Bundler\Compiling\Admin;
 
 use Illuminate\Support\Facades\Cache;
+use StorePHP\Bundler\Contracts\Form\FormHasFields;
+use StorePHP\Bundler\Contracts\Form\FormHasTabs;
 use StorePHP\Bundler\Lib\Form\Fields;
 use StorePHP\Bundler\Lib\Form\Tabs;
 
@@ -28,9 +30,18 @@ class FormsAdminCompile
                     $formClass = include($filename);
 
                     $fields = new Fields;
+
+                    if (!$formClass instanceof FormHasFields) {
+                        throw new \Exception('Must implement `FormHasFields` in ' . $id . '_' . basename($filename, '.php'), 1);
+                    }
+
                     $tabs = new Tabs;
 
                     (new $formClass)->fields($fields);
+
+                    if ($formClass instanceof FormHasTabs) {
+                        (new $formClass)->tabs($tabs);
+                    }
 
                     (new $formClass)->tabs($tabs);
 

@@ -3,6 +3,7 @@
 namespace StorePHP\Bundler\Compiling;
 
 use Illuminate\Support\Facades\Cache;
+use StorePHP\Bundler\Contracts\ACL\HasPermissions;
 use StorePHP\Bundler\Lib\ACL;
 
 class ACLCompile
@@ -25,6 +26,11 @@ class ACLCompile
                 $acl = new ACL;
                 $pathACLFile = require $pathACLFile;
                 $pathACLFile = new $pathACLFile;
+
+                if (!$pathACLFile instanceof HasPermissions) {
+                    throw new \Exception('Must implement `HasPermissions` in ' . $id, 1);
+                }
+
                 $pathACLFile->permissions($acl);
 
                 $outACLs[$id] = array_merge($outACLs[$id] ?? [], $acl->getPermissions());

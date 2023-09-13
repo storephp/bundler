@@ -8,7 +8,7 @@ use StorePHP\Bundler\Compiling\Admin\FormsAdminCompile;
 use StorePHP\Bundler\Compiling\Admin\GridsAdminCompile;
 use StorePHP\Bundler\Compiling\Admin\ModulesAdminCompile;
 use StorePHP\Bundler\Compiling\Admin\RoutesAdminCompile;
-use StorePHP\Bundler\Compiling\Admin\SidebarAdminCompile;
+use StorePHP\Bundler\Compiling\Admin\NavbarAdminCompile;
 use StorePHP\Bundler\Compiling\ConfigurationCompile;
 use StorePHP\Bundler\Compiling\FormsCompile;
 use StorePHP\Bundler\Compiling\GridsCompile;
@@ -45,7 +45,7 @@ class Setup
         $this->adminCompiles = [
             ModulesAdminCompile::class,
             RoutesAdminCompile::class,
-            SidebarAdminCompile::class,
+            NavbarAdminCompile::class,
             GridsAdminCompile::class,
             FormsAdminCompile::class,
         ];

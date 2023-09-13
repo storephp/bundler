@@ -53,11 +53,11 @@ class BundlesManagement
     }
 
     /**
-     * Get the value of admin sidebar
+     * Get the value of admin navbar
      */
-    public function getAdminSidebar()
+    public function getAdminNavbar()
     {
-        return Cache::get($this->getCachePrefix() . 'storephp_admin_sidebar');
+        return Cache::get($this->getCachePrefix() . 'storephp_admin_navbar');
     }
 
     /**

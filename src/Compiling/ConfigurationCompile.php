@@ -3,6 +3,7 @@
 namespace StorePHP\Bundler\Compiling;
 
 use Illuminate\Support\Facades\Cache;
+use StorePHP\Bundler\Contracts\Configuration\iConfiguration;
 use StorePHP\Bundler\Lib\Configuration\Fields;
 use StorePHP\Bundler\Lib\Configuration\SubTabs;
 use StorePHP\Bundler\Lib\Configuration\Tab;
@@ -28,6 +29,10 @@ class ConfigurationCompile
             if (file_exists($pathConfigurationFile)) {
                 $configuration = require $pathConfigurationFile;
                 $configuration = new $configuration;
+
+                if (!$configuration instanceof iConfiguration) {
+                    throw new \Exception('Must implement `iConfiguration` in ' . $id, 1);
+                }
 
                 $tab = new Tab;
                 $subtabs = new SubTabs;
